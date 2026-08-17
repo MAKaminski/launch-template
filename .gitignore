@@ -1,0 +1,43 @@
+# dependencies
+node_modules/
+.pnp
+.pnp.*
+
+# next
+/.next/
+/out/
+next-env.d.ts
+
+# production
+/build
+
+# testing
+/coverage
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+
+# env — never commit real credentials
+.env
+.env.local
+.env.*.local
+
+# vercel — per-launch project linkage, never committed to the template
+.vercel
+
+# supabase
+/supabase/.branches
+/supabase/.temp
+
+# misc
+.DS_Store
+*.pem
+*.tsbuildinfo
+.eslintcache
+
+# debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*

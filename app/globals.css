@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+/* Tailwind v4 is CSS-first: theme tokens are declared here, not in a
+   tailwind.config.js (which v4 no longer requires). */
+@theme {
+  --font-sans:
+    var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, "SF Mono", monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: white;
+  color: rgb(10 10 10);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: rgb(10 10 10);
+    color: rgb(245 245 245);
+  }
+}

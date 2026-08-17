@@ -1,0 +1,31 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    open-pull-requests-limit: 5
+    # Versions are pinned exactly (no ^) so a launch built six months from now
+    # resolves the same tree. Dependabot is how those pins move — deliberately,
+    # with CI proving each bump, rather than silently at install time.
+    versioning-strategy: increase
+    groups:
+      # One PR per ecosystem keeps peer-dependent packages moving together;
+      # bumping `next` without `eslint-config-next` breaks the lint stack.
+      next:
+        patterns: ["next", "@next/*", "eslint-config-next", "react", "react-dom", "@types/react*"]
+      dev-tooling:
+        patterns: ["eslint*", "typescript", "vitest", "@playwright/*", "tailwindcss", "@tailwindcss/*"]
+      integrations:
+        patterns: ["@supabase/*", "stripe", "@stripe/*", "posthog-*", "@calcom/*"]
+    ignore:
+      # typescript-eslint (via eslint-config-next) supports `typescript <6.1.0`.
+      # TypeScript 7 is the native Go port and is outside that range — taking it
+      # breaks `pnpm lint`. Remove this once the lint stack supports 7.x.
+      - dependency-name: typescript
+        versions: ["7.x"]
+
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly

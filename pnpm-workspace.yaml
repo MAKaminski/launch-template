@@ -1,0 +1,12 @@
+# pnpm 10+ reads these settings here rather than from the "pnpm" field in
+# package.json. Without an explicit decision for every package that ships an
+# install script, `pnpm install` exits non-zero on ERR_PNPM_IGNORED_BUILDS and
+# every downstream script (build, test, CI) fails before it starts.
+#
+#   esbuild        — required: links the platform binary that vitest and tsx run on
+#   unrs-resolver  — required: native resolver for eslint-import-resolver-typescript
+#   core-js        — declined: its postinstall only prints a funding notice
+allowBuilds:
+  core-js: false
+  esbuild: true
+  unrs-resolver: true

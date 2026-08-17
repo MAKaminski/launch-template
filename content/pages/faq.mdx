@@ -1,0 +1,46 @@
+---
+title: FAQ
+description: Common questions about how the template works and what happens without credentials.
+nav: true
+order: 20
+ogImage: null
+---
+
+# Frequently asked
+
+<FAQ
+  items={[
+    {
+      question: "Does it run without any credentials?",
+      answer:
+        "Yes. Clone it, run pnpm install and pnpm dev, and every page renders with no .env.local at all. Each unconfigured integration turns into a no-op and logs one warning. Check /api/health to see exactly what is wired up.",
+    },
+    {
+      question: "Why one shared PostHog project instead of one per launch?",
+      answer:
+        "Cross-launch comparison in a single view, one key to rotate, and a pooled event quota. Every event carries a launch_slug super property, so a per-launch dashboard is just a filter.",
+    },
+    {
+      question: "Why a schema per launch rather than a database per launch?",
+      answer:
+        "Supabase caps how many projects can be active on the free and pro tiers. A Postgres schema per launch gives clean row-level-security boundaries without paying per launch. Remember to expose the schema in Settings, API, Exposed schemas.",
+    },
+    {
+      question: "What stops a customer changing the price at checkout?",
+      answer:
+        "The browser only ever sends a plan key. The server maps that key to a Stripe Price ID from launch.config.ts, so an amount supplied by the client is never trusted and never used.",
+    },
+    {
+      question: "What happens if Stripe sends the same webhook twice?",
+      answer:
+        "Nothing the second time. Every webhook writes to a shared webhook_events ledger keyed on the provider's event id before any business logic runs. A conflicting insert returns 200 immediately, so a retry cannot double-record an order.",
+    },
+    {
+      question: "Can search engines be notified automatically?",
+      answer:
+        "Bing, Yandex, Seznam and Naver can — pnpm seo:submit pushes every sitemap URL to them through IndexNow. Google cannot: it retired anonymous sitemap pinging, and its Indexing API only accepts job postings and broadcast events. Google gets robots.txt, a sitemap and a verification meta tag, then discovers pages by crawling.",
+    },
+  ]}
+/>
+
+Still stuck? <BookingButton label="Book fifteen minutes" />

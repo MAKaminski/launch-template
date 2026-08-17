@@ -1,0 +1,11 @@
+# After creating a repo from this template, swap @MAKaminski for the owning
+# handle or team (e.g. @org/launch-team).
+*                           @MAKaminski
+
+# Paths where a mistake is expensive and silent — money, data access, and the
+# event taxonomy every dashboard is built on.
+/app/api/webhooks/          @MAKaminski
+/app/api/checkout/          @MAKaminski
+/lib/webhooks/              @MAKaminski
+/lib/analytics/events.ts    @MAKaminski
+/supabase/migrations/       @MAKaminski

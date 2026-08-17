@@ -1,0 +1,39 @@
+---
+title: About
+description: Why this template exists and the thinking behind how it is put together.
+nav: true
+order: 10
+ogImage: null
+---
+
+# About
+
+This is a template for testing product ideas quickly, built around one observation:
+the expensive part of a new idea isn't the code, it's the twenty small integration
+decisions you re-make every single time.
+
+## The shape of it
+
+One Vercel project per launch, so each idea gets its own domain and its own deploy
+cadence. Everything behind that is shared:
+
+| Layer | Shared? | Joined by |
+| --- | --- | --- |
+| Hosting | No — one project per launch | — |
+| Analytics | Yes — one PostHog project | `launch_slug` super property |
+| Database | Yes — one Supabase project | `launch_<slug>` schema |
+| Payments | Yes — one Stripe account | `metadata.launch_slug` |
+| Scheduling | Yes — one Cal.com account | one event type per launch |
+
+The shared-account choice is deliberate. Per-launch projects would multiply cost and
+admin without buying isolation that matters at this stage, and a single `launch_slug`
+gives you cross-launch comparison in one view — which is the actual question you're
+asking when you run several ideas at once.
+
+## Adding a page
+
+Drop an `.mdx` file in `content/pages/`. Set `nav: true` in the frontmatter and it
+appears in the navigation, in the sitemap, and starts reporting pageviews. There is
+no second step.
+
+<BookingButton label="Talk it through" />
